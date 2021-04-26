@@ -11,18 +11,11 @@ const draw = (ctx: CanvasRenderingContext2D, radius: number, time: Moment) => {
 };
 
 const drawFace = (ctx: CanvasRenderingContext2D, radius: number) => {
-  let grad;
-
   ctx.beginPath();
   ctx.arc(0, 0, radius, 0, 2 * Math.PI);
   ctx.fillStyle = "white";
   ctx.fill();
 
-  grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
-  grad.addColorStop(0, "#333");
-  grad.addColorStop(0.5, "white");
-  grad.addColorStop(1, "#333");
-  ctx.strokeStyle = grad;
   ctx.lineWidth = radius * 0.1;
   ctx.stroke();
 
@@ -33,8 +26,8 @@ const drawFace = (ctx: CanvasRenderingContext2D, radius: number) => {
 };
 
 const drawNumbers = (ctx: CanvasRenderingContext2D, radius: number) => {
-  var ang;
-  var num;
+  let ang;
+  let num;
   ctx.font = radius * 0.15 + "px arial";
   ctx.textBaseline = "middle";
   ctx.textAlign = "center";
@@ -55,9 +48,9 @@ const drawTime = (
   radius: number,
   now: Moment
 ) => {
-  var hour = now.hours();
-  var minute = now.minutes();
-  var second = now.seconds();
+  let hour = now.hours();
+  let minute = now.minutes();
+  let second = now.seconds();
   //hour
   hour = hour % 12;
   hour =
@@ -95,23 +88,19 @@ const Canvas = (props: any) => {
   useEffect(() => {
     const canvas: any = canvasRef.current;
     const context = canvas.getContext("2d");
-    let radius = canvas.height / 2;
+    const radius = canvas.height / 2;
     context.translate(radius, radius);
-    radius = radius * 0.9;
-
-    draw(context, radius, props.time);
   }, []);
 
   useEffect(() => {
     const canvas: any = canvasRef.current;
     const context = canvas.getContext("2d");
-    let radius = canvas.height / 2;
-    radius = radius * 0.9;
+    const radius = (canvas.height / 2) * 0.9;
 
     draw(context, radius, props.time);
-  }, [draw, props.time]);
+  }, [props.time]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef} className="clock" />;
 };
 
 export default Canvas;
