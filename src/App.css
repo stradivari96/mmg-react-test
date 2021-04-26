@@ -10,8 +10,9 @@ body {
 }
 
 .clock {
-  width: 500;
-  height: 500;
+  width: 80%;
+  height: 80%;
+  max-width: 500px;
 }
 
 .timezone {
