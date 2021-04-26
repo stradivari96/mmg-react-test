@@ -1,8 +1,10 @@
 # React developers test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Demo (github pages): https://www.xiang.dev/mmg-react-test/
 
 Prompt: https://github.com/medlabmg/developers-tests/tree/master/frontend/react
+
+The commits follow the [gitmoji](https://gitmoji.dev/) convention and the code is formatted with [prettier](https://prettier.io/).
 
 ## Available Scripts
 
