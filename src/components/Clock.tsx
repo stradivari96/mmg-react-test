@@ -100,7 +100,7 @@ const Canvas = (props: any) => {
     draw(context, radius, props.time);
   }, [props.time]);
 
-  return <canvas ref={canvasRef} className="clock" />;
+  return <canvas ref={canvasRef} className="clock" width={500} height={500} />;
 };
 
 export default Canvas;

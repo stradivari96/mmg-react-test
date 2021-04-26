@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import Clock from "./components/Clock";
+import Header from "./components/Header";
 
 import "./App.css";
 
@@ -34,6 +35,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    setTime(moment().tz(timezone));
     const interval = setInterval(() => setTime(moment().tz(timezone)), 1000);
     return () => {
       clearInterval(interval);
@@ -41,27 +43,25 @@ function App() {
   }, [timezone]);
 
   useEffect(() => {
-    if (time.seconds() === 0) checkAlarms();
-  }, [time]);
-
-  const checkAlarms = () => {
-    const hour = time.hours();
-    const minute = time.minutes();
-    const alerts = alarms
-      .filter((a) => {
-        let [alarmHour, alarmMinute] = a.time.split(":").map(Number);
-        return a.active && alarmHour === hour && alarmMinute === minute;
-      })
-      .map((a) => a.message);
-    Swal.queue(alerts);
-  };
+    if (time.seconds() === 0) {
+      const hour = time.hours();
+      const minute = time.minutes();
+      const alerts = alarms
+        .filter((a) => {
+          let [alarmHour, alarmMinute] = a.time.split(":").map(Number);
+          return a.active && alarmHour === hour && alarmMinute === minute;
+        })
+        .map((a) => a.message);
+      Swal.queue(alerts);
+    }
+  }, [time, alarms]);
 
   return (
     <div className="App">
+      <Header />
       <Autocomplete
-        id="combo-box-demo"
+        className="timezone"
         options={moment.tz.names()}
-        style={{ width: 300 }}
         renderInput={(params) => (
           <TextField {...params} label="Timezone" variant="outlined" />
         )}
